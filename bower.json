@@ -1,0 +1,20 @@
+{
+  "name": "angular-no-dblclick",
+  "version": "1.0.0",
+  "homepage": "https://github.com/akempes/angular-no-dblclick",
+  "authors": [
+    "Arjan Kempes <a_kempes@msn.com>"
+  ],
+  "description": "",
+  "main": [
+    "dist/no-dblclick.js"
+  ],
+  "ignore": [],
+  "dependencies": {
+    "angular": ">=1.2.0"
+  },
+  "keywords": [
+    "Angular",
+  ],
+  "license": "MIT"
+}
