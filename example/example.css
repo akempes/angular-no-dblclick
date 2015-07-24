@@ -1,0 +1,9 @@
+button{
+	background-color: green;
+	color: black;
+	border: 0px;
+}
+
+button[disabled]{
+	background-color: red;
+}

@@ -12,7 +12,7 @@
         <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
     </head>
 
-    <body ng-controller="ExampleController" class="ng-cloak container">
+    <body class="ng-cloak container">
 
         <div class="navbar navbar-inverse">
             <div class="navbar-inner">
@@ -23,11 +23,18 @@
         <h3>Basic</h3>
 
         <div>
-            <button no-dblclick>Click me!</button> 
+            <button no-dblclick>Click me!</button><br/>
+            <button no-dblclick ng-click="test1()">Click me!</button><br/>
+            <div ng-controller="ExampleController">
+                <button no-dblclick ng-click="test2();">Click me!</button><br/>
+                <button no-dblclick ng-click="test2(); ">Click me!</button><br/>
+                <a ng-click="unlockall()">Unlock all</a>
+            </div>
             <pre></pre>
         </div>
 
-
+        <a ng-click="unlock()">Unlock</a>
+        <a ng-click="unlockall()">Unlock all</a>
 
 
 
