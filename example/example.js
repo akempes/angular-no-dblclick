@@ -2,25 +2,40 @@
 
 var myApp = angular.module('exampleApp',['noDblclick']);
 
-myApp.controller('ExampleController', ['$scope', function( $scope ){
+myApp
+.controller('ExampleBaseController', ['$scope', function( $scope ){
     'use strict';
 
-    	$scope.test1 = function () {
-    		console.log('test1');
-    	};
+        $scope.unlock = function () {
+            $scope.$broadcast('noDblclick.unlock', 0);
+        };
 
-    	$scope.test2 = function () {
-    		console.log('test2');
-    	};
+        $scope.unlockAll = function () {
+            $scope.$broadcast('noDblclick.unlock');
+        };
 
-    	$scope.unlock = function  () {
-    		$scope.$broadcast('noDblclick.unlock', 1);
-    	}
-    	
-    	$scope.unlockall = function  () {
-    		$scope.$broadcast('noDblclick.unlock');
-    	}
+    }
+])
+.controller('ExampleChildController', ['$scope', '$rootScope', function( $scope, $rootScope ){
+    'use strict';
 
+        
+        $scope.unlockInScope = function () {
+            $scope.$broadcast('noDblclick.unlock', 2);
+        };
+
+        $scope.unlockAllInScope = function () {
+            $scope.$broadcast('noDblclick.unlock');
+        };
+        
+
+        $scope.unlockRoot = function () {
+            $rootScope.$broadcast('noDblclick.unlock', 0);
+        };
+
+        $scope.unlockRootAll = function () {
+            $rootScope.$broadcast('noDblclick.unlock');
+        };
     }
 ]);
 
