@@ -18,7 +18,6 @@ myApp
 ])
 .controller('ExampleChildController', ['$scope', '$rootScope', function( $scope, $rootScope ){
     'use strict';
-
         
         $scope.unlockInScope = function () {
             $scope.$broadcast('noDblclick.unlock', 2);

@@ -8,14 +8,14 @@ button[disabled]{
 	background-color: red;
 }
 
- .base{
- 	border:1px solid blue;
- 	padding: 10px;
- 	margin: 10px;
- }
+.base{
+	border:1px solid blue;
+	padding: 10px;
+	margin: 10px;
+}
 
- .child{
- 	border:1px solid red;
- 	padding: 10px;
- 	margin: 10px;
- }
+.child{
+	border:1px solid red;
+	padding: 10px;
+	margin: 10px;
+}

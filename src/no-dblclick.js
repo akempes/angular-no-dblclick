@@ -5,6 +5,7 @@ module
     'use strict';
 
     var elements = {},
+    increment = 0,
     
     // Toggle is-disabled state
     setState = function (id, state) {
@@ -31,9 +32,8 @@ module
     // Add element to service
     this.add = function (obj) {
         obj = angular.extend(obj || {}, {
-            id        : Object.keys(elements).length,
-            isDisabled: false,
-            domId     : ''
+            id        : increment++,
+            isDisabled: false
         });
         elements[obj.id] = obj;
 
@@ -97,7 +97,7 @@ module
                 // Add service to scope
                 if(!$scope.noDblclickService){
                     $scope.noDblclickService = noDblclickService;
-                }
+                }             
 
                 var garbage = []; 
 
