@@ -6,34 +6,13 @@ myApp
 .controller('ExampleBaseController', ['$scope', function( $scope ){
     'use strict';
 
-        $scope.unlock = function () {
-            $scope.$broadcast('noDblclick.unlock', 0);
-        };
-
-        $scope.unlockAll = function () {
-            $scope.$broadcast('noDblclick.unlock');
-        };
-
     }
 ])
 .controller('ExampleChildController', ['$scope', '$rootScope', function( $scope, $rootScope ){
     'use strict';
-        
-        $scope.unlockInScope = function () {
-            $scope.$broadcast('noDblclick.unlock', 2);
-        };
 
-        $scope.unlockInScopeByKey = function () {
-            $scope.$broadcast('noDblclick.unlock', 'custom');
-        };
-
-        $scope.unlockAllInScope = function () {
-            $scope.$broadcast('noDblclick.unlock');
-        };
-        
-
-        $scope.unlockRoot = function () {
-            $rootScope.$broadcast('noDblclick.unlock', 0);
+        $scope.lockRootAll = function () {
+            $rootScope.$broadcast('noDblclick.lock');
         };
 
         $scope.unlockRootAll = function () {

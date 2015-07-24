@@ -6,10 +6,10 @@
         
         <script src="../src/no-dblclick.js" type="text/javascript"></script>
 
+        <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
         <script src="example.js" type="text/javascript"></script>
         <link href="example.css" rel="stylesheet">
 
-        <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
     </head>
 
     <body class="ng-cloak container">
@@ -24,28 +24,39 @@
 
         <div ng-controller="ExampleBaseController" class="base">
             <h4>Base controller</h4>
-            <button no-dblclick="custom">Click me! (Index: 0)</button><br/>
-            <button no-dblclick ng-click="test1()">Click me! (Index: 1)</button><br/>
+            <button no-dblclick="customKey1">Button A</button> <pre><button no-dblclick="customKey1">Button A</button></pre><br/>
+            <button no-dblclick>Button B</button> <pre><button no-dblclick>Button B</button></pre>
+            <br/>
+
+            <a ng-click="$broadcast('noDblclick.lock', 'customKey1');">Lock Button A</a><pre>$scope.$broadcast('noDblclick.lock', 'customKey1');</pre><br/>
+            <a ng-click="$broadcast('noDblclick.unlock', 'customKey1');">Unlock Button A</a><pre>$scope.$broadcast('noDblclick.unlock', 'customKey1');</pre><br/>
+            <a ng-click="$broadcast('noDblclick.lock');">Lock all button in base scope</a><pre>$scope.$broadcast('noDblclick.lock');</pre><br/>
+            <a ng-click="$broadcast('noDblclick.unlock');">Unlock all button in base scope</a><pre>$scope.$broadcast('noDblclick.unlock');</pre><br/>
 
             <div ng-controller="ExampleChildController" class="child">
                 <h4>Child controller</h4>
 
-                <button no-dblclick="customKey" ng-click="test1();">Click me! (Index: 2)</button><br/>
+                <button no-dblclick="customKey2">Button C</button> <pre><button no-dblclick="customKey2">Button C</button></pre><br/>
+                <div class="checkbox">
+                    <label>
+                        <input ng-model="custom_disabled" type="checkbox"> Disable button D
+                    </label>
+                </div>
+                <button no-dblclick ng-disabled="custom_disabled">Button D</button> <pre><button no-dblclick ng-disabled="custom_disabled">Button D</button></pre><br/>
 
-                <label for=""><input ng-model="custom_disabled" type="checkbox"> Disable button index 3</label>
-                <button no-dblclick ng-click="test2();" ng-disabled="custom_disabled">Click me! (Index: 3)</button><br/>
-                <a ng-click="unlockInScope()">Unlock index 2 via child scope</a><br/>
-                <a ng-click="unlockInScopeByKey()">Unlock by key</a><br/>
-                <a ng-click="unlockAllInScope()">Unlock all via child scope</a><br/>
-                <a ng-click="unlockRoot()">Unlock index 0 via rootScoope</a><br/>
-                <a ng-click="unlockRootAll()">Unlock all via rootScoope</a><br/>
+                <a ng-click="$broadcast('noDblclick.lock', 'customKey2')">Lock C</a><pre>$scope.$broadcast('noDblclick.lock', 'customKey2');</pre><br/>
+                <a ng-click="$broadcast('noDblclick.unlock', 'customKey2')">Unlock C</a><pre>$scope.$broadcast('noDblclick.unlock', 'customKey2');</pre><br/>
+                <a ng-click="$broadcast('noDblclick.lock', 'customKey1')">Lock A</a><pre>$scope.$broadcast('noDblclick.lock', 'customKey1');</pre><br/>
+                <a ng-click="$broadcast('noDblclick.unlock', 'customKey1')">Unlock A</a><pre>$scope.$broadcast('noDblclick.unlock', 'customKey1');</pre><br/>
+                <br/>
+                <a ng-click="$broadcast('noDblclick.lock');">Lock all via child scope</a><pre>$scope.$broadcast('noDblclick.lock');</pre><br/>
+                <a ng-click="$broadcast('noDblclick.unlock');">Unlock all via child scope</a><pre>$scope.$broadcast('noDblclick.unlock');</pre><br/>
+                <br/>
+                <a ng-click="lockRootAll()">Lock all via rootScoope</a><pre>$rootScope.$broadcast('noDblclick.lock');</pre><br/>
+                <a ng-click="unlockRootAll()">Unlock all via rootScoope</a><pre>$rootScope.$broadcast('noDblclick.unlock');</pre><br/>
             </div>
-
-            <a ng-click="unlock()">Unlock index 0 via base scope</a><br/>
-            <a ng-click="unlockAll()">Unlock all via base scope</a><br/>
         </div>
 
-    <a ng-click="$broadcast('$destroy')">clean</a>
 
         <script>
 

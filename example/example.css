@@ -1,21 +1,47 @@
 button{
-	background-color: green;
+	background-color: lightgreen;
 	color: black;
 	border: 0px;
+	padding: 5px;
+	width: 196px;
+	margin-bottom: 2px;
 }
 
 button[disabled]{
 	background-color: red;
 }
 
+pre{
+	display: inline-block;
+	margin-left: 30px;
+	width: 550px;
+	padding: 1px;
+}
+
+.base a{
+	display: inline-block;
+	width: 200px;
+}
+
+.child a{
+	padding-left: 0px;
+}
+
+.child button{
+	margin-left: 0px;
+}
+
 .base{
 	border:1px solid blue;
 	padding: 10px;
 	margin: 10px;
+	padding-left: 40px;
 }
 
 .child{
 	border:1px solid red;
 	padding: 10px;
+	padding-left: 20px;
 	margin: 10px;
+	margin-left: -20px;
 }

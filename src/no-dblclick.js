@@ -9,13 +9,13 @@ module
     increment = 0,
     
     getId = function (id) {
-        if(angular.isString(id) && lookUp[id]){
+        if(angular.isString(id) && lookUp[id]!==undefined){
             return lookUp[id];
         }
         return id;
     },
     getKey = function (id) {
-        if(!angular.isString(id) && elements[id]){
+        if(!angular.isString(id) && elements[id]!==undefined){
             return elements[id].key;
         }
         return id;
@@ -25,7 +25,6 @@ module
     setState = function (id, state) {
 
         id = getId(id);
-
         if(elements[id].isDisabled!==state){
             elements[id].isDisabled = state;
         }
@@ -34,7 +33,7 @@ module
     // Get element disabled state
     this.isDisabled = function (id) {
         id = getId(id);
-        return id && elements[id] ? elements[id].isDisabled : false;
+        return id!==undefined && elements[id] ? elements[id].isDisabled : false;
     };
 
     // Set disabled
@@ -54,12 +53,12 @@ module
             throw 'noDblclick :: Invalid key. Key must be a string and unique.';
         }
 
-        increment += 1;
         var obj = {
-            id        : increment,
+            id        : angular.copy(increment),
             key       : key,
             isDisabled: false
         };
+        increment += 1;
         elements[obj.id] = obj;
         lookUp[key] = obj.id;
 
