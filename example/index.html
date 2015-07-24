@@ -24,17 +24,18 @@
 
         <div ng-controller="ExampleBaseController" class="base">
             <h4>Base controller</h4>
-            <button no-dblclick>Click me! (Index: 0)</button><br/>
+            <button no-dblclick="custom">Click me! (Index: 0)</button><br/>
             <button no-dblclick ng-click="test1()">Click me! (Index: 1)</button><br/>
 
             <div ng-controller="ExampleChildController" class="child">
                 <h4>Child controller</h4>
 
-                <button no-dblclick ng-click="test1();">Click me! (Index: 2)</button><br/>
+                <button no-dblclick="customKey" ng-click="test1();">Click me! (Index: 2)</button><br/>
 
                 <label for=""><input ng-model="custom_disabled" type="checkbox"> Disable button index 3</label>
                 <button no-dblclick ng-click="test2();" ng-disabled="custom_disabled">Click me! (Index: 3)</button><br/>
                 <a ng-click="unlockInScope()">Unlock index 2 via child scope</a><br/>
+                <a ng-click="unlockInScopeByKey()">Unlock by key</a><br/>
                 <a ng-click="unlockAllInScope()">Unlock all via child scope</a><br/>
                 <a ng-click="unlockRoot()">Unlock index 0 via rootScoope</a><br/>
                 <a ng-click="unlockRootAll()">Unlock all via rootScoope</a><br/>
@@ -43,6 +44,8 @@
             <a ng-click="unlock()">Unlock index 0 via base scope</a><br/>
             <a ng-click="unlockAll()">Unlock all via base scope</a><br/>
         </div>
+
+    <a ng-click="$broadcast('$destroy')">clean</a>
 
         <script>
 

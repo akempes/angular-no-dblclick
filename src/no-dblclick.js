@@ -1,14 +1,31 @@
 var module = angular.module('noDblclick', ['ng']);
 
 module
-.service('noDblclickService', [function ( ) {
+.service('noDblclickService', [ function ( ) {
     'use strict';
 
     var elements = {},
+    lookUp = {},
     increment = 0,
     
+    getId = function (id) {
+        if(angular.isString(id) && lookUp[id]){
+            return lookUp[id];
+        }
+        return id;
+    },
+    getKey = function (id) {
+        if(!angular.isString(id) && elements[id]){
+            return elements[id].key;
+        }
+        return id;
+    },
+
     // Toggle is-disabled state
     setState = function (id, state) {
+
+        id = getId(id);
+
         if(elements[id].isDisabled!==state){
             elements[id].isDisabled = state;
         }
@@ -16,7 +33,8 @@ module
 
     // Get element disabled state
     this.isDisabled = function (id) {
-        return elements[id].isDisabled;
+        id = getId(id);
+        return id && elements[id] ? elements[id].isDisabled : false;
     };
 
     // Set disabled
@@ -30,19 +48,28 @@ module
     };
 
     // Add element to service
-    this.add = function (obj) {
-        obj = angular.extend(obj || {}, {
-            id        : increment++,
+    this.add = function (key) {
+
+        if(key && (!angular.isString(key) || (angular.isString(key) && lookUp[key]))){
+            throw 'noDblclick :: Invalid key. Key must be a string and unique.';
+        }
+
+        increment += 1;
+        var obj = {
+            id        : increment,
+            key       : key,
             isDisabled: false
-        });
+        };
         elements[obj.id] = obj;
+        lookUp[key] = obj.id;
 
         return obj;
     };
 
     // Remove element from service
     this.remove = function (id) {
-        delete elements[id];
+        delete lookUp[getKey(id)];
+        delete elements[getId(id)];
     };
 
 
@@ -60,7 +87,7 @@ module
 
 
             // Add object to service
-            obj = noDblclickService.add();
+            obj = noDblclickService.add(tElement.attr('no-dblclick'));
 
           
             // Add disableMe function to ng-click

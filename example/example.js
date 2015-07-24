@@ -23,6 +23,10 @@ myApp
             $scope.$broadcast('noDblclick.unlock', 2);
         };
 
+        $scope.unlockInScopeByKey = function () {
+            $scope.$broadcast('noDblclick.unlock', 'custom');
+        };
+
         $scope.unlockAllInScope = function () {
             $scope.$broadcast('noDblclick.unlock');
         };
