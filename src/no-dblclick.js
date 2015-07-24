@@ -46,6 +46,11 @@ module
         setState(id, false);
     };
 
+    this.get = function (id){
+        id = getId(id);
+        return elements[id] || undefined;
+    };
+
     // Add element to service
     this.add = function (key) {
 
@@ -73,10 +78,10 @@ module
 
 
 }])
-.directive('noDblclick', [ 'noDblclickService', '$compile', function( noDblclickService, $compile ) {
-	'use strict';
+.directive('noDblclick', [ 'noDblclickService', '$compile', '$parse', function( noDblclickService, $compile, $parse ) {
+    'use strict';
 
-		// I augment the template element DOM structure before linking.
+        // I augment the template element DOM structure before linking.
         function compile( tElement ) {
 
             var sublink, obj,
@@ -94,6 +99,7 @@ module
                 ngClick += ';';
             }
             ngClick += 'noDblclickService.lock('+obj.id+');';
+            obj.ngClick = ngClick;
 
 
             // prevent double click
@@ -111,7 +117,7 @@ module
 
 
             // Set new attributes
-            tElement.attr( 'ng-click', ngClick);
+            tElement.attr( 'ng-click', 'noDblclickServiceClick('+obj.id+')');
             tElement.attr( 'ng-dblclick', ngDblclick);
             tElement.attr( 'ng-disabled', ngDisabled);
 
@@ -123,6 +129,12 @@ module
                 // Add service to scope
                 if(!$scope.noDblclickService){
                     $scope.noDblclickService = noDblclickService;
+                    $scope.noDblclickServiceClick = function (id) {
+                        if(!noDblclickService.isDisabled(id)){
+                            var expression = $parse(noDblclickService.get(id).ngClick);
+                            expression($scope);
+                        }
+                    };
                 }             
 
                 var garbage = []; 
@@ -160,13 +172,12 @@ module
 
         }
 
-	return {
+    return {
         compile: compile,
         priority: 1500,
         restrict: 'A',
         terminal: true,
         transclude: true
-	};
+    };
 
 }]);
-

@@ -24,38 +24,59 @@
 
         <div ng-controller="ExampleBaseController" class="base">
             <h4>Base controller</h4>
-            <button no-dblclick="customKey1">Button A</button> <pre><button no-dblclick="customKey1">Button A</button></pre><br/>
-            <button no-dblclick>Button B</button> <pre><button no-dblclick>Button B</button></pre>
+            <button no-dblclick="customKey1" ng-click="test()">Button A</button> <pre class="small"><button no-dblclick="customKey1" ng-click="test()">Button A</button></pre><br/>
+            <button no-dblclick>Button B</button> <pre class="small"><button no-dblclick>Button B</button></pre>
             <br/>
 
-            <a ng-click="$broadcast('noDblclick.lock', 'customKey1');">Lock Button A</a><pre>$scope.$broadcast('noDblclick.lock', 'customKey1');</pre><br/>
-            <a ng-click="$broadcast('noDblclick.unlock', 'customKey1');">Unlock Button A</a><pre>$scope.$broadcast('noDblclick.unlock', 'customKey1');</pre><br/>
-            <a ng-click="$broadcast('noDblclick.lock');">Lock all button in base scope</a><pre>$scope.$broadcast('noDblclick.lock');</pre><br/>
-            <a ng-click="$broadcast('noDblclick.unlock');">Unlock all button in base scope</a><pre>$scope.$broadcast('noDblclick.unlock');</pre><br/>
+            <a ng-click="$broadcast('noDblclick.lock', 'customKey1');">Lock Button A</a><pre class="small">$scope.$broadcast('noDblclick.lock', 'customKey1');</pre><br/>
+            <a ng-click="$broadcast('noDblclick.unlock', 'customKey1');">Unlock Button A</a><pre class="small">$scope.$broadcast('noDblclick.unlock', 'customKey1');</pre><br/>
+            <a ng-click="$broadcast('noDblclick.lock');">Lock all button in base scope</a><pre class="small">$scope.$broadcast('noDblclick.lock');</pre><br/>
+            <a ng-click="$broadcast('noDblclick.unlock');">Unlock all button in base scope</a><pre class="small">$scope.$broadcast('noDblclick.unlock');</pre><br/>
 
             <div ng-controller="ExampleChildController" class="child">
                 <h4>Child controller</h4>
 
-                <button no-dblclick="customKey2">Button C</button> <pre><button no-dblclick="customKey2">Button C</button></pre><br/>
+                <button no-dblclick="customKey2">Button C</button> <pre class="small"><button no-dblclick="customKey2">Button C</button></pre><br/>
                 <div class="checkbox">
                     <label>
                         <input ng-model="custom_disabled" type="checkbox"> Disable button D
                     </label>
                 </div>
-                <button no-dblclick ng-disabled="custom_disabled">Button D</button> <pre><button no-dblclick ng-disabled="custom_disabled">Button D</button></pre><br/>
+                <button no-dblclick ng-disabled="custom_disabled">Button D</button> <pre class="small"><button no-dblclick ng-disabled="custom_disabled">Button D</button></pre><br/>
 
-                <a ng-click="$broadcast('noDblclick.lock', 'customKey2')">Lock C</a><pre>$scope.$broadcast('noDblclick.lock', 'customKey2');</pre><br/>
-                <a ng-click="$broadcast('noDblclick.unlock', 'customKey2')">Unlock C</a><pre>$scope.$broadcast('noDblclick.unlock', 'customKey2');</pre><br/>
-                <a ng-click="$broadcast('noDblclick.lock', 'customKey1')">Lock A</a><pre>$scope.$broadcast('noDblclick.lock', 'customKey1');</pre><br/>
-                <a ng-click="$broadcast('noDblclick.unlock', 'customKey1')">Unlock A</a><pre>$scope.$broadcast('noDblclick.unlock', 'customKey1');</pre><br/>
+                <a ng-click="$broadcast('noDblclick.lock', 'customKey2')">Lock C</a><pre class="small">$scope.$broadcast('noDblclick.lock', 'customKey2');</pre><br/>
+                <a ng-click="$broadcast('noDblclick.unlock', 'customKey2')">Unlock C</a><pre class="small">$scope.$broadcast('noDblclick.unlock', 'customKey2');</pre><br/>
+                <a ng-click="$broadcast('noDblclick.lock', 'customKey1')">Lock A</a><pre class="small">$scope.$broadcast('noDblclick.lock', 'customKey1');</pre><br/>
+                <a ng-click="$broadcast('noDblclick.unlock', 'customKey1')">Unlock A</a><pre class="small">$scope.$broadcast('noDblclick.unlock', 'customKey1');</pre><br/>
                 <br/>
-                <a ng-click="$broadcast('noDblclick.lock');">Lock all via child scope</a><pre>$scope.$broadcast('noDblclick.lock');</pre><br/>
-                <a ng-click="$broadcast('noDblclick.unlock');">Unlock all via child scope</a><pre>$scope.$broadcast('noDblclick.unlock');</pre><br/>
+                <a ng-click="$broadcast('noDblclick.lock');">Lock all via child scope</a><pre class="small">$scope.$broadcast('noDblclick.lock');</pre><br/>
+                <a ng-click="$broadcast('noDblclick.unlock');">Unlock all via child scope</a><pre class="small">$scope.$broadcast('noDblclick.unlock');</pre><br/>
                 <br/>
-                <a ng-click="lockRootAll()">Lock all via rootScoope</a><pre>$rootScope.$broadcast('noDblclick.lock');</pre><br/>
-                <a ng-click="unlockRootAll()">Unlock all via rootScoope</a><pre>$rootScope.$broadcast('noDblclick.unlock');</pre><br/>
+                <a ng-click="lockRootAll()">Lock all via rootScoope</a><pre class="small">$rootScope.$broadcast('noDblclick.lock');</pre><br/>
+                <a ng-click="unlockRootAll()">Unlock all via rootScoope</a><pre class="small">$rootScope.$broadcast('noDblclick.unlock');</pre><br/>
+
+                <h3>Other elements</h3>
+                <strong>Table</strong>
+                <table>
+                    <tr>
+                        <td ng-click="test()">TD cell without</td>
+                        <td ng-click="test()" no-dblclick="testTD">TD cell with</td>
+                    </tr>
+                </table>
+<pre><table>
+    <tr>
+        <td ng-click="test()">TD cell without</td>
+        <td ng-click="test()" no-dblclick="testTD">TD cell with</td>
+    </tr>
+</table></pre>
+                <strong>Div</strong>
+                <div class="div" ng-click="test()">Div without</div>
+                <div class="div" ng-click="test()" no-dblclick="testDiv">Div with</div>
+<pre><div class="div" ng-click="test()">Div without</div>
+<div class="div" ng-click="test()" no-dblclick="testDiv">Div with</div></pre>
             </div>
         </div>
+
 
 
         <script>
