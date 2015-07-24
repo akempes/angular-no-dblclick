@@ -10,7 +10,7 @@ You can install an angular-no-dblclick package very easily using Bower:
 bower install angular-no-dblclick
 ```
 
-And add the file to your index file:
+And add the file to your index page:
 
 ```html
 <script src="angular-no-dblclick/dist/no-dblclick.js"></script>
