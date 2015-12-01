@@ -33,7 +33,7 @@ To get it working simply add the attribute ```no-dblclick``` to your element:
 ```html
 <button no-dblclick>Click me!</button>
 ```
-Optionally, you can add a unique key for reference:
+Optionally, you can add a key for reference:
 
 ```html
 <button no-dblclick="myKey">Click me!</button>
@@ -43,16 +43,16 @@ The element will be disabled after the very first click.
 ## How to control
 
 ### Release locked element(s)
-To release a locked element simply broadcast on your scope:
-
-```js
-$scope.$broadcast('noDblclick.unlock', 'myKey');
-```
-
-The second argument ('myKey') is optional. To release all elements in the scope just broadcast this event without key:
+To release all elements in the scope just broadcast this event:
 
 ```js
 $scope.$broadcast('noDblclick.unlock');
+```
+
+The second argument is optional. To release a single locked element simply broadcast on your scope with the key:
+
+```js
+$scope.$broadcast('noDblclick.unlock', 'myKey');
 ```
 
 To release all elements in your application at once:

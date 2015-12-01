@@ -5,16 +5,16 @@
   "authors": [
     "Arjan Kempes <a_kempes@msn.com>"
   ],
-  "description": "",
+  "description": "This directive will prevent double click events on any element.",
   "main": [
-    "dist/no-dblclick.js"
+    "src/no-dblclick.js"
   ],
   "ignore": [],
   "dependencies": {
     "angular": ">=1.2.0"
   },
   "keywords": [
-    "Angular",
+    "Angular"
   ],
   "license": "MIT"
 }
