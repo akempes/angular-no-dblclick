@@ -46,8 +46,8 @@
 
                 <a ng-click="$broadcast('noDblclick.lock', 'customKey2')">Lock C</a><pre class="small">$scope.$broadcast('noDblclick.lock', 'customKey2');</pre><br/>
                 <a ng-click="$broadcast('noDblclick.unlock', 'customKey2')">Unlock C</a><pre class="small">$scope.$broadcast('noDblclick.unlock', 'customKey2');</pre><br/>
-                <a ng-click="$broadcast('noDblclick.lock', 'customKey1')">Lock A</a><pre class="small">$scope.$broadcast('noDblclick.lock', 'customKey1');</pre><br/>
-                <a ng-click="$broadcast('noDblclick.unlock', 'customKey1')">Unlock A</a><pre class="small">$scope.$broadcast('noDblclick.unlock', 'customKey1');</pre><br/>
+                <a ng-click="lockViaRootScope('customKey1')">Lock A</a><pre class="small">$rootScope.$broadcast('noDblclick.lock', 'customKey1');</pre><br/>
+                <a ng-click="unlockViaRootScope('customKey1')">Unlock A</a><pre class="small">$rootScope.$broadcast('noDblclick.unlock', 'customKey1');</pre><br/>
                 <br/>
                 <a ng-click="$broadcast('noDblclick.lock');">Lock all via child scope</a><pre class="small">$scope.$broadcast('noDblclick.lock');</pre><br/>
                 <a ng-click="$broadcast('noDblclick.unlock');">Unlock all via child scope</a><pre class="small">$scope.$broadcast('noDblclick.unlock');</pre><br/>
