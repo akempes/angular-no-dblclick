@@ -6,15 +6,17 @@ module
 
     var service = function (tElement) {
         var me = this,
-        is_disabled = false,
         ngClick = (tElement.attr('ng-click') || '').replace(/\s/g, ''),
         ngDblclick = (tElement.attr('ng-dblclick') || '').replace(/\s/g, ''),
         ngDisabled = (tElement.attr('ng-disabled') || '').replace(/\s/g, '');
-
+      
       
         // Add lock function to ng-click
-        if(ngClick!=='' && ngClick.indexOf(';', ngClick.length - 1) < 0){
-            ngClick += ';';
+        if(ngClick!==''){
+            if(ngClick.slice(-1)===';'){
+                ngClick = ngClick.slice(0, -1);
+            }
+            ngClick = '(noDblclickService.is_disabled || ('+ngClick+'));';
         }
         ngClick += 'noDblclickService.lock();';
 
@@ -38,19 +40,20 @@ module
         tElement.attr( 'ng-disabled', ngDisabled);
 
 
+        this.is_disabled = false;
         this.sublink = $compile( tElement, null, 1500 );
         this.key = tElement.attr('no-dblclick');
 
         this.lock = function () {
-            is_disabled = true;
+            me.is_disabled = true;
         };
 
         this.unlock = function () {
-            is_disabled = false;
+            me.is_disabled = false;
         };
 
         this.isDisabled = function () {
-            return is_disabled;
+            return me.is_disabled;
         };
 
         /*jslint unparam:true */
