@@ -118,7 +118,6 @@ module
         compile: compile,
         priority: 1500,
         restrict: 'A',
-        terminal: true,
         transclude: true,
         scope:{}
     };
