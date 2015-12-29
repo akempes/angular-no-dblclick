@@ -30,7 +30,7 @@ module
         this.link = function () {
 
             $scope = $scope.$parent.$new();
-            me = me;
+            $scope.noDblclickService = me;
 
             var garbage = []; 
 

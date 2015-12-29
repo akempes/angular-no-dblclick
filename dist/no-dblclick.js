@@ -27,7 +27,7 @@ module
         };
 
         /*jslint unparam:true */
-        this.getLink = function () {
+        this.link = function () {
 
             $scope = $scope.$parent.$new();
             $scope.noDblclickService = me;
@@ -49,13 +49,13 @@ module
 
             // Add listeners to scope
             garbage.push($scope.$on('noDblclick.unlock', function(event, id) {
-                if(id===undefined || id===$scope.noDblclickService.key){
-                    $scope.noDblclickService.unlock();
+                if(id===undefined || id===me.key){
+                    me.unlock();
                 }
             }));
             garbage.push($scope.$on('noDblclick.lock', function(event, id) {
-                if(id===undefined || id===$scope.noDblclickService.key){
-                    $scope.noDblclickService.lock();
+                if(id===undefined || id===me.key){
+                    me.lock();
                 }
             }));
 
@@ -81,7 +81,7 @@ module
         priority: -1500,
         restrict: 'A',
         link: function ($scope, element) {
-            return new noDblclickService($scope, element).getLink();
+            return new noDblclickService($scope, element).link();
         },
         scope:{}
     };
