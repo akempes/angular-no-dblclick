@@ -1,57 +1,25 @@
 var module = angular.module('noDblclick', ['ng']);
 
 module
-.factory('noDblclickService', [ '$compile', '$timeout', function( $compile, $timeout ) {
+.factory('noDblclickService', [ '$timeout', function( $timeout ) {
     'use strict';
 
-    var service = function (tElement) {
-        var me = this,
-        ngClick = (tElement.attr('ng-click') || '').replace(/\s/g, ''),
-        ngDblclick = (tElement.attr('ng-dblclick') || '').replace(/\s/g, ''),
-        ngDisabled = (tElement.attr('ng-disabled') || '').replace(/\s/g, '');
-      
-      
-        // Add lock function to ng-click
-        if(ngClick!==''){
-            if(ngClick.slice(-1)===';'){
-                ngClick = ngClick.slice(0, -1);
-            }
-            ngClick = '(noDblclickService.is_disabled || ('+ngClick+'));';
-        }
-        ngClick += 'noDblclickService.lock();';
-
-
-        // prevent double click
-        if(ngDblclick!=='' && ngDblclick.indexOf(';', ngDblclick.length - 1) < 0){
-            ngDblclick += ';';
-        }
-        ngDblclick = 'return -1;';
-
-
-        // Add isDisabled expression to ng-disabled
-        if(ngDisabled!==''){
-            ngDisabled = '('+ngDisabled+') || ';
-        }
-        ngDisabled += 'noDblclickService.isDisabled();';
-
-        // Set new attributes
-        tElement.attr( 'ng-click', ngClick);
-        tElement.attr( 'ng-dblclick', ngDblclick);
-        tElement.attr( 'ng-disabled', ngDisabled);
-
+    var service = function ($scope, element) {
+        var me = this;
 
         this.is_disabled = false;
-        this.sublink = $compile( tElement, null, 1500 );
-        this.key = tElement.attr('no-dblclick');
+        this.key = element.attr('no-dblclick');
 
         this.lock = function () {
             $timeout(function () {
                 me.is_disabled = true;
+                element.attr('disabled', 'disabled');
             });
         };
 
         this.unlock = function () {
             me.is_disabled = false;
+            element.removeAttr('disabled');
         };
 
         this.isDisabled = function () {
@@ -59,12 +27,25 @@ module
         };
 
         /*jslint unparam:true */
-        this.getLink = function ( $scope, element, attributes, modelCtrl, transclude ) {
+        this.getLink = function () {
 
             $scope = $scope.$parent.$new();
             $scope.noDblclickService = me;
 
             var garbage = []; 
+
+            element.bind('click', function(e) {
+
+                // Kill ng-click if disabeld
+                if(me.is_disabled){
+                    e.stopImmediatePropagation();
+                    e.preventDefault();
+                    return false;
+                }
+
+                // Lock element
+                me.lock();
+            });
 
             // Add listeners to scope
             garbage.push($scope.$on('noDblclick.unlock', function(event, id) {
@@ -78,47 +59,30 @@ module
                 }
             }));
 
-
             // Destroy listeners
             $scope.$on('$destroy', function() {
                 angular.forEach(garbage, function (listener) {
                     listener();
                 });
+                element.unbind('click');
             });
-
-
-            transclude(
-                function( content ) {
-                    element.append( content );
-                }
-            );
-
-            $scope.noDblclickService.sublink( $scope );
 
         };
         /*jslint unparam:false */
 
     };
 
-    return {
-        getService: function (tElement) {
-            return new service(tElement);
-        }
-    };
+    return service;
 }])
 .directive('noDblclick', [ 'noDblclickService', function( noDblclickService ) {
     'use strict';
 
-    // I augment the template element DOM structure before linking.
-    function compile( tElement ) {
-        return noDblclickService.getService(tElement).getLink;
-    }
-
     return {
-        compile: compile,
-        priority: 1500,
+        priority: -1500,
         restrict: 'A',
-        transclude: true,
+        link: function ($scope, element) {
+            return new noDblclickService($scope, element).getLink();
+        },
         scope:{}
     };
 
