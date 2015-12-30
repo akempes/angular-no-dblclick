@@ -12,19 +12,28 @@
 
     </head>
 
-    <body class="ng-cloak container">
+    <body class="ng-cloak container" ng-controller="ExampleBaseController">
 
         <div class="navbar navbar-inverse">
             <div class="navbar-inner">
                 <a class="brand" href="https://github.com/akempes/angular-no-dblclick">Angular-no-dblclick - Examples</a>
             </div>
         </div>
-    
-        <h3>Example</h3>
 
-        <div ng-controller="ExampleBaseController" class="base">
+        <h3>Example</h3>
+    
+        <div class="right">
+            <h4>Logging</h4>
+            <ul>
+                <li ng-repeat="entery in logging">
+                    <em>{{entery.when | date:'HH:mm.sss'}}</em> {{entery.msg}}
+                </li>
+            </ul>
+        </div>
+
+        <div class="base">
             <h4>Base controller</h4>
-            <button no-dblclick="customKey1" ng-click="test()">Button A</button> <pre class="small"><button no-dblclick="customKey1" ng-click="test()">Button A</button></pre><br/>
+            <button no-dblclick="customKey1" ng-click="test('Button A')">Button A</button> <pre class="small"><button no-dblclick="customKey1" ng-click="test('Button A')">Button A</button></pre><br/>
             <button no-dblclick>Button B</button> <pre class="small"><button no-dblclick>Button B</button></pre>
             <br/>
 
@@ -59,21 +68,21 @@
                 <strong>Table</strong>
                 <table>
                     <tr>
-                        <td ng-click="test()">TD cell without</td>
-                        <td ng-click="test()" no-dblclick="testTD">TD cell with</td>
+                        <td ng-click="test('TD cell without')">TD cell without</td>
+                        <td ng-click="test('TD cell with')" no-dblclick="testTD">TD cell with</td>
                     </tr>
                 </table>
 <pre><table>
     <tr>
-        <td ng-click="test()">TD cell without</td>
-        <td ng-click="test()" no-dblclick="testTD">TD cell with</td>
+        <td ng-click="test('TD cell without')">TD cell without</td>
+        <td ng-click="test('TD cell with')" no-dblclick="testTD">TD cell with</td>
     </tr>
 </table></pre>
                 <strong>Div</strong>
-                <div class="div" ng-click="test()">Div without</div>
-                <div class="div" ng-click="test()" no-dblclick="testDiv">Div with</div>
-<pre><div class="div" ng-click="test()">Div without</div>
-<div class="div" ng-click="test()" no-dblclick="testDiv">Div with</div></pre>
+                <div class="div" ng-click="test('Div without')">Div without</div>
+                <div class="div" ng-click="test('Div with')" no-dblclick="testDiv">Div with</div>
+<pre><div class="div" ng-click="test('Div without')">Div without</div>
+<div class="div" ng-click="test('Div with')" no-dblclick="testDiv">Div with</div></pre>
             </div>
         </div>
 

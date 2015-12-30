@@ -14,7 +14,7 @@ button[disabled]{
 pre.small{
 	display: inline-block;
 	margin-left: 30px;
-	width: 550px;
+	width: 610px;
 	padding: 1px;
 }
 
@@ -38,6 +38,17 @@ table td[disabled]{
 }
 .div[disabled]{
 	background-color: red;
+}
+
+.base, .right{
+	display: inline-block;
+}
+.right{
+	width: 18%;
+	float: right;
+}
+.base{
+	width: 75%;
 }
 
 .base a{

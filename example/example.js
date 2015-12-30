@@ -6,8 +6,11 @@ myApp
 .controller('ExampleBaseController', ['$scope', function( $scope ){
     'use strict';
 
-        $scope.test = function () {
-            console.log('test');
+        $scope.logging = [];
+
+        $scope.test = function (who) {
+            var now = new Date;
+            $scope.logging.push({msg:who, when:now});
         };
 
     }
