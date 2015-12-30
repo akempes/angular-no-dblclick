@@ -22,16 +22,8 @@ module
             element.removeAttr('disabled');
         };
 
-        this.isDisabled = function () {
-            return me.is_disabled;
-        };
-
         /*jslint unparam:true */
         this.link = function () {
-
-            $scope = $scope.$parent.$new();
-            $scope.noDblclickService = me;
-
             var garbage = []; 
 
             element.bind('click', function(e) {
@@ -82,8 +74,7 @@ module
         restrict: 'A',
         link: function ($scope, element) {
             return new noDblclickService($scope, element).link();
-        },
-        scope:{}
+        }
     };
 
 }]);
