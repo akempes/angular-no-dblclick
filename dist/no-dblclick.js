@@ -18,8 +18,10 @@ module
         };
 
         this.unlock = function () {
-            me.is_disabled = false;
-            element.removeAttr('disabled');
+            $timeout(function () {
+                me.is_disabled = false;
+                element.removeAttr('disabled');
+            });
         };
 
         /*jslint unparam:true */
