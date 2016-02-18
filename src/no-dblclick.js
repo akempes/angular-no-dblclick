@@ -25,11 +25,12 @@ module
             var garbage = []; 
 
             element.bind('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
 
                 // Kill ng-click if disabeld
                 if(me.is_disabled){
                     e.stopImmediatePropagation();
-                    e.preventDefault();
                     return false;
                 }
 

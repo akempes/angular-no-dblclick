@@ -11,10 +11,8 @@ module
         this.key = element.attr('no-dblclick');
 
         this.lock = function () {
-            // $timeout(function () {
-                me.is_disabled = true;
-                element.addClass('disabled');
-            // });
+            me.is_disabled = true;
+            element.addClass('disabled');
         };
 
         this.unlock = function () {
@@ -27,11 +25,12 @@ module
             var garbage = []; 
 
             element.bind('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
 
                 // Kill ng-click if disabeld
                 if(me.is_disabled){
                     e.stopImmediatePropagation();
-                    e.preventDefault();
                     return false;
                 }
 
