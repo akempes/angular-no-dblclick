@@ -1,7 +1,7 @@
 var module = angular.module('noDblclick', ['ng']);
 
 module
-.factory('noDblclickService', [ '$timeout', function( $timeout ) {
+.factory('noDblclickService', [ function( ) {
     'use strict';
 
     var service = function ($scope, element) {
@@ -11,15 +11,15 @@ module
         this.key = element.attr('no-dblclick');
 
         this.lock = function () {
-            $timeout(function () {
+            // $timeout(function () {
                 me.is_disabled = true;
-                element.attr('disabled', 'disabled');
-            });
+                element.addClass('disabled');
+            // });
         };
 
         this.unlock = function () {
             me.is_disabled = false;
-            element.removeAttr('disabled');
+            element.removeClass('disabled');
         };
 
         /*jslint unparam:true */
