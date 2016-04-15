@@ -40,6 +40,8 @@ Optionally, you can add a key for reference:
 ```
 The element will be disabled after the very first click.
 
+Note: When the key is specified, the directive will broadcast `$scope.$broadcast('noDblclick.lock', 'myKey');` on the rootscope locking all directives with the same key.
+
 ## How to control
 
 ### Release locked element(s)
