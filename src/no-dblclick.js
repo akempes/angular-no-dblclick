@@ -1,7 +1,7 @@
 var module = angular.module('noDblclick', ['ng']);
 
 module
-.factory('noDblclickService', [ function( ) {
+.factory('noDblclickService', [ '$rootScope', function( $rootScope ) {
     'use strict';
 
     var service = function ($scope, element) {
@@ -35,6 +35,9 @@ module
 
                 // Lock element
                 me.lock();
+                if(me.key){
+                    $rootScope.$broadcast('noDblclick.lock', me.key);
+                }
             });
 
             // Add listeners to scope
