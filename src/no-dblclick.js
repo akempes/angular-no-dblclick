@@ -1,6 +1,5 @@
-var module = angular.module('noDblclick', ['ng']);
+angular.module('noDblclick', ['ng'])
 
-module
 .factory('noDblclickService', [ '$rootScope', function( $rootScope ) {
     'use strict';
 
